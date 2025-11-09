@@ -1,0 +1,173 @@
+/* Подключение шрифта */
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+/* Сброс отступов */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+
+    margin: 0;
+    padding: 0;
+}
+
+/* Стили для HTML */
+html {
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+}
+
+/* Основной контейнер прогресса */
+.progress {
+    display: flex;
+    flex-direction: column;
+
+    padding: 20px;
+}
+
+/* Контейнер круга и переключателей */
+.progress__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    margin-top: 50px;
+    gap: 100px;
+}
+
+/* Адаптив для горизонтальной ориентации */
+@media (orientation: landscape) {
+    .progress__container {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+}
+
+/* Контейнер переключателей */
+.progress__controls {
+    display: flex;
+    flex-direction: column;
+
+    gap: 15px;
+}
+
+/* Сам круг */
+.progress__circle {
+    --progress: 75%;
+
+    position: relative;
+
+    width: 110px;
+    height: 110px;
+
+    border-radius: 50%;
+    background: conic-gradient(
+            #005dff calc(var(--progress)),
+            #eef3f6 0
+    );
+}
+
+/* Анимация вращения круга */
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.progress__circle--spin {
+    animation: spin 2s linear infinite;
+}
+
+/* Внутренний белый круг */
+.progress__circle::before {
+    position: absolute;
+
+    inset: 10px;
+
+    border-radius: 50%;
+    background: #ffffff;
+    content: "";
+}
+
+/* Поле ввода "Value" */
+.progress__input {
+    text-align: center;
+
+    padding: 4px;
+    width: 40px;
+
+    border: 1px solid #000000;
+    border-radius: 25px;
+    outline: none;
+}
+
+/* Отключение стрелок у input */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+/* Контейнер определённого переключателя */
+.progress__control {
+    display: flex;
+
+    gap: 20px;
+}
+
+/* Сам переключатель */
+.progress__switch .progress__toggle {
+    position: relative;
+
+    width: 40px;
+    height: 26px;
+
+    background-color: #dfe6f0;
+    border-radius: 25px;
+    appearance: none;
+  }
+
+/* Плавный переход переключателя */
+.progress__switch .progress__toggle,
+.progress__switch .progress__toggle::after {
+    transition: all 100ms ease-out;
+}
+
+/* Белый круг внутри переключателя */
+.progress__switch .progress__toggle::after {
+    position: absolute;
+
+    left: 2px;
+    top: 2px;
+    width: 22px;
+    height: 22px;
+
+    background-color: #fff;
+    border-radius: 50%;
+    content: "";
+}
+
+/* Изменение при наведении на переключатель */
+.progress__switch .progress__toggle:hover {
+    cursor: pointer;
+}
+
+/* Изменение фона переключателя в отмеченном состоянии */
+.progress__switch .progress__toggle:checked {
+    background-color: #005dff;
+}
+
+/* Смещение белого круга внутри переключателя */
+.progress__switch .progress__toggle:checked::after {
+    left: 15.5px;
+
+    background-color: #fff;
+}
